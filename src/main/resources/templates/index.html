@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="jumbotron bg-light p-5 rounded-3 my-4">
+        <p class="lead">A simple URL shortener service. Create short, easy-to-share links.</p>
+    </div>
+
+    <h2 class="mt-5">Public Shortened URLs</h2>
+    <div th:if="${shortUrls.isEmpty()}" class="alert alert-info">
+        No public URLs have been created yet.
+    </div>
+    <div th:unless="${shortUrls.isEmpty()}" class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Short URL</th>
+                <th>Original URL</th>
+                <th>Created</th>
+                <th>Expires</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="url : ${shortUrls}">
+                <td>
+                    <a th:href="@{/s/{key}(key=${url.shortKey})}" th:text="${baseUrl + '/s/' + url.shortKey}" target="_blank"></a>
+                </td>
+                <td>
+                    <a th:href="${url.originalUrl}" th:text="${#strings.abbreviate(url.originalUrl, 50)}" target="_blank"></a>
+                </td>
+                <td th:text="${#temporals.format(url.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${url.expiresAt != null ? #temporals.format(url.expiresAt, 'yyyy-MM-dd HH:mm') : 'Never'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
