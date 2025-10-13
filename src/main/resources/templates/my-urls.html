@@ -57,7 +57,7 @@
         </div>
         <div th:unless="${shortUrls.data.isEmpty()}" class="table-responsive">
             <form id="deleteForm" th:action="@{/delete-urls}" method="post">
-                <div class="mb-3">
+                <div class="m-3">
                     <button id="deleteSelectedBtn" class="btn btn-danger" disabled>
                         Delete Selected
                     </button>
@@ -84,7 +84,7 @@
                             </td>
                             <td>
                                 <a th:href="@{/s/{key}(key=${url.shortKey})}"
-                                   th:text="${baseUrl + '/s/' + url.shortKey}"
+                                   th:text="${url.shortKey}"
                                    target="_blank"></a>
                             </td>
                             <td>

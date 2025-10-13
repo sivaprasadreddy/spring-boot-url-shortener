@@ -9,13 +9,13 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="admin-dashboard-container">
         <h2 class="mt-5">All Shortened URLs</h2>
         <div th:if="${shortUrls.data.isEmpty()}" class="alert alert-info">
             No short URLs found.
         </div>
         <div th:unless="${shortUrls.data.isEmpty()}" class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover admin-dashboard-table">
                     <thead>
                         <tr>
                             <th>Short URL</th>
@@ -30,7 +30,7 @@
                     <tbody>
                         <tr th:each="url : ${shortUrls.data}">
                             <td>
-                                <a th:href="@{/s/{key}(key=${url.shortKey})}" th:text="${baseUrl + '/s/' + url.shortKey}" target="_blank"></a>
+                                <a th:href="@{/s/{key}(key=${url.shortKey})}" th:text="${url.shortKey}" target="_blank"></a>
                             </td>
                             <td>
                                 <a th:href="${url.originalUrl}" th:text="${#strings.abbreviate(url.originalUrl, 50)}" target="_blank"></a>

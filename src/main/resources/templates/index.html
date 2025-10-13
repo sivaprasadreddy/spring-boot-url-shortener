@@ -67,7 +67,7 @@
             <tbody>
             <tr th:each="url : ${shortUrls.data}">
                 <td>
-                    <a th:href="@{/s/{key}(key=${url.shortKey})}" th:text="${baseUrl + '/s/' + url.shortKey}" target="_blank"></a>
+                    <a th:href="@{/s/{key}(key=${url.shortKey})}" th:text="${url.shortKey}" target="_blank"></a>
                 </td>
                 <td>
                     <a th:href="${url.originalUrl}" th:text="${#strings.abbreviate(url.originalUrl, 50)}" target="_blank"></a>
